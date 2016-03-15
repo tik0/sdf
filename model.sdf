@@ -1,0 +1,414 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="AMiRo">
+    <static>false</static>
+      <link name='chassis'>
+        <inertial>
+          <pose>-0.01 0.0 0.02 0 0 0</pose>
+          <mass>0.4</mass>
+          <inertia>
+          <!--
+          http://en.wikipedia.org/wiki/List_of_moment_of_inertia_tensors
+                    MATLAB:
+                    m=0.4; r=0.1; h=0.07; 
+                    ixx = 1/12*m*(3*r^2+h^2)
+                    iyy = ixx 
+                    izz = 1/2*m*r^2 
+                    
+          -->
+          <ixx>0.0012</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0012</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.005</izz>
+          </inertia>
+        </inertial>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+          
+        <collision name='collision_DiWheelDrive'>
+          <pose>0 0 .011 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.05</radius>
+              <length>.002</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name='visual_DiWheelDrive'>
+          <pose>0 0 .011 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.05</radius>
+              <length>.002</length>
+            </cylinder>
+          </geometry>
+        </visual>
+        
+        <collision name='collision_SensorRing'>
+          <pose>0 0 .037 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.05</radius>
+              <length>.051</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name='visual_SensorRing'>
+          <pose>0 0 .037 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.05</radius>
+              <length>.051</length>
+            </cylinder>
+          </geometry>
+        </visual>
+
+        <collision name='collision_Hat'>
+          <pose>0 0 .073 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.05</radius>
+              <length>.02</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name='visual_Hat'>
+          <pose>0 0 .073 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.05</radius>
+              <length>.02</length>
+            </cylinder>
+          </geometry>
+        </visual>
+
+        <collision name="collision_sph_caster_front">
+        <pose>0.042 0 0.0025 0 0 0</pose>
+        <laser_retro>0</laser_retro>
+        <geometry>
+          <sphere>
+            <radius>0.002</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.01</mu>
+              <mu2>0.01</mu2>
+              <fdir1> 0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>100000</threshold>
+          </bounce>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1000000000000</kp>
+              <kd>1</kd>
+              <max_vel>100</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+        </collision>
+        <collision name='collision_sph_caster_front'>
+          <pose>0.042 0 0.0025 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>.002</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0</mu>
+                <mu2>0</mu2>
+              </ode>
+              <bullet>
+                <friction>0</friction>
+                <friction2>0</friction2>
+              </bullet>
+            </friction>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual_sph_caster_front'>
+          <pose>0.042 0 0.0025 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>.002</radius>
+            </sphere>
+          </geometry>
+        </visual>
+        
+        <collision name='collision_cyl_caster_front'>
+          <pose>0.042 0 0.0065 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.003</radius>
+              <length>.007</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0</mu>
+                <mu2>0</mu2>
+              </ode>
+              <bullet>
+                <friction>0</friction>
+                <friction2>0</friction2>
+              </bullet>
+            </friction>
+            <contact>
+              <collide_without_contact>0</collide_without_contact>
+            </contact>
+          </surface>
+        </collision>
+        <visual name='visual_cyl_caster_front'>
+          <pose>0.042 0 0.0065 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.003</radius>
+              <length>.007</length>
+            </cylinder>
+          </geometry>
+        </visual>
+
+        <collision name='collision_sph_caster_back'>
+          <pose>-0.042 0 0.0025 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>.002</radius>
+            </sphere>
+          </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.01</mu>
+              <mu2>0.01</mu2>
+              <fdir1> 0 0 0</fdir1>
+              <slip1>0</slip1>
+              <slip2>0</slip2>
+            </ode>
+          </friction>
+<!--          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>100000</threshold>
+          </bounce>
+          <contact>
+            <ode>
+              <soft_cfm>0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+              <kp>1000000000000</kp>
+              <kd>1</kd>
+              <max_vel>100</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>-->
+        </surface>
+        </collision>
+        <visual name='visual_sph_caster_back'>
+          <pose>-0.042 0 0.0025 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>.002</radius>
+            </sphere>
+          </geometry>
+        </visual>
+        
+        <collision name='collision_cyl_caster_back'>
+          <pose>-0.042 0 0.0065 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.003</radius>
+              <length>.007</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name='visual_cyl_caster_back'>
+          <pose>-0.042 0 0.0065 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>.003</radius>
+              <length>.007</length>
+            </cylinder>
+          </geometry>
+        </visual>
+
+      </link>
+
+<!--      <include>
+        <uri>model://hokuyo</uri>
+        <pose>0 0 0.118 0 0 0</pose>
+      </include>
+      <joint name="hokuyo_joint" type="revolute">
+        <child>hokuyo::link</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <upper>0</upper>
+            <lower>0</lower>
+          </limit>
+        </axis>
+      </joint>-->
+
+      <link name="left_wheel">
+        <pose>0.0 0.035 0.030 0 1.5707 1.5707</pose>
+        <inertial>
+          <mass>0.02</mass>
+          <inertia>
+          <!--
+          http://en.wikipedia.org/wiki/List_of_moment_of_inertia_tensors
+                    MATLAB:
+                    m=0.02; r=0.0275; h=0.0062; 
+                    ixx = 1/12*m*(3*r^2+h^2)
+                    iyy = ixx 
+                    izz = 1/2*m*r^2 
+                    
+          -->
+          <ixx>0.0000068453</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0000068453</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0000075625</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.03</radius>
+              <length>.006</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.5</mu>
+                <mu2>0.5</mu2>
+                <slip1>0.5</slip1>
+                <slip2>0.5</slip2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.03</radius>
+              <length>.006</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+
+      <link name="right_wheel">
+        <pose>0.0 -0.035 0.03 0 1.5707 1.5707</pose>
+        <inertial>
+          <mass>0.02</mass>
+          <inertia>
+          <!--
+          http://en.wikipedia.org/wiki/List_of_moment_of_inertia_tensors
+                    MATLAB:
+                    m=0.02; r=0.0275; h=0.0062; 
+                    ixx = 1/12*m*(3*r^2+h^2)
+                    iyy = ixx 
+                    izz = 1/2*m*r^2 
+                    
+          -->
+          <ixx>0.0000068453</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.0000068453</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.0000075625</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>.03</radius>
+              <length>.006</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.5</mu>
+                <mu2>0.5</mu2>
+                <slip1>0.5</slip1>
+                <slip2>0.5</slip2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>.03</radius>
+              <length>.006</length>
+            </cylinder>
+          </geometry>
+        </visual>
+      </link>
+
+      <joint type="revolute" name="left_wheel_hinge">
+        <pose>0 0 0 0 0 0</pose>
+        <child>left_wheel</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+        </axis>
+      </joint>
+      <joint type="revolute" name="right_wheel_hinge">
+        <pose>0 0 0 0 0 0</pose>
+        <child>right_wheel</child>
+        <parent>chassis</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+        </axis>
+      </joint>
+<!--    <plugin name="model_push" filename="libgazebo_rsb_wheel.so">
+      <differentialKinematicSubscope>diffKin</differentialKinematicSubscope>
+      <baseWidth>0.06</baseWidth>
+      <wheelRadius>0.03</wheelRadius>
+      <rightWheelMaxForceN>2.4</rightWheelMaxForceN>
+      <leftWheelMaxForceN>2.4</leftWheelMaxForceN>
+    </plugin>-->
+    
+    <link name="gps">
+      <sensor name="positioning" type="gps">
+        <pose>0 0 0 0 0 0</pose>
+        <always_on>1</always_on>
+        <update_rate>10</update_rate>
+        <visualize>true</visualize>
+      </sensor>
+    </link>
+<!--    <plugin name="positioning" filename="libgazebo_rsb_gps.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>10.0</updateRate>
+      <gpsSubscope>gps</gpsSubscope>
+    </plugin>
+    <plugin name="odometry" filename="libgazebo_rsb_odom_amiro.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>10.0</updateRate>
+      <odomSubscope>odom</odomSubscope>
+      <baseWidth>0.055</baseWidth>
+      <kl>0.01</kl>
+      <kr>0.01</kr>
+    </plugin>-->
+  </model>
+</sdf>
